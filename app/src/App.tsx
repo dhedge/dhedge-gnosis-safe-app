@@ -1,7 +1,12 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useContext } from 'react';
 import styled from "styled-components";
 import { Button, Loader, Title } from "@gnosis.pm/safe-react-components";
 import { useSafe } from '@rmeissner/safe-apps-react-sdk';
+import Stepper from '@material-ui/core/Stepper';
+import Step from '@material-ui/core/Step';
+import StepLabel from '@material-ui/core/StepLabel';
+import StepContent from '@material-ui/core/StepContent';
+import { GlobalState } from 'GlobalState'
 
 const Container = styled.form`
   margin-bottom: 2rem;
@@ -17,6 +22,7 @@ const Container = styled.form`
 const App: React.FC = () => {
   const safe = useSafe()  
   const [submitting, setSubmitting] = useState(false)
+  const [state, setState] = useContext(GlobalState)
   const submitTx = useCallback(async () => {
     setSubmitting(true)
     try {
@@ -35,17 +41,37 @@ const App: React.FC = () => {
     }
     setSubmitting(false)
   }, [safe])
-  return <Container>
-    <Title size="md">{safe.info.safeAddress}</Title>
-    {submitting ? 
-    <>
-      <Loader size="md" /><br/>
-      <Button size="lg" color="secondary" onClick={() => {setSubmitting(false)}}>Cancel</Button>
-    </>
-    : 
-    <Button size="lg" color="primary" onClick={submitTx}>Submit</Button>
-    }
-  </Container>
+  const steps = [{
+    id: '1',
+    label: 'Select Pool'
+  }]
+  return (
+    <Container>
+      <Title size="md">{safe.info.safeAddress}</Title>
+      <Stepper activeStep={state.activeStep} orientation="vertical">
+          <Step key={'0'}>
+            <StepLabel>Select Pool</StepLabel>
+            <StepContent>
+              <div>
+                <div>
+                  <Button size = "md" color = "secondary">
+                    Back
+                  </Button>
+                </div>
+              </div>
+            </StepContent>
+          </Step>
+      </Stepper>
+      {submitting ? 
+      <>
+        <Loader size="md" /><br/>
+        <Button size="lg" color="secondary" onClick={() => {setSubmitting(false)}}>Cancel</Button>
+      </>
+      : 
+      <Button size="lg" color="primary" onClick={submitTx}>Submit</Button>
+      }
+    </Container>
+  )
 };
 
 export default App;
