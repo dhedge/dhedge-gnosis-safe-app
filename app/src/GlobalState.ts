@@ -1,6 +1,5 @@
 import React, { createContext } from 'react'
 
-
 interface StateInterface {
     activeStep?: number
 }
@@ -8,7 +7,6 @@ interface StateInterface {
 const initialState: StateInterface = {
     activeStep: 0
 }
-
 
 const initialContext: [StateInterface, React.Dispatch<React.SetStateAction<StateInterface>>] = [{}, () => ({})]
 
