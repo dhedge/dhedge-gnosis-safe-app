@@ -1,13 +1,13 @@
-import React, { useCallback, useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import styled from "styled-components";
-import { Button, Loader } from "@gnosis.pm/safe-react-components";
-import { useSafe } from '@rmeissner/safe-apps-react-sdk';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import StepContent from '@material-ui/core/StepContent';
-import { GlobalState } from 'GlobalState'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+
+import { GlobalState } from 'GlobalState'
+import { SelectFund, SelectedFund } from 'components'
 
 const theme = createMuiTheme({
   palette: {
@@ -38,27 +38,7 @@ const Container = styled.form`
 `;
 
 const StepperContainer: React.FC = () => {
-  const safe = useSafe()  
-  const [submitting, setSubmitting] = useState(false)
-  const [state, setState] = useContext(GlobalState)
-  const submitTx = useCallback(async () => {
-    setSubmitting(true)
-    try {
-      const safeTxHash = await safe.sendTransactions([
-        {
-          "to": safe.info.safeAddress,
-          "value": "0",
-          "data": "0x"
-        }
-      ])
-      console.log({safeTxHash})
-      const safeTx = await safe.loadSafeTransaction(safeTxHash)
-      console.log({safeTx})
-    } catch (e) {
-      console.error(e)
-    }
-    setSubmitting(false)
-  }, [safe])
+  const [state] = useContext(GlobalState)
 
   return (
     <Container>
@@ -67,44 +47,17 @@ const StepperContainer: React.FC = () => {
             <Step key={'0'}>
               <StepLabel>Select Pool</StepLabel>
               <StepContent>
-                <div>
-                  <Button 
-                    size = "md" 
-                    color = "secondary"
-                    onClick = {() => setState({ ...state, activeStep: 1 })}
-                  >
-                    Select
-                  </Button>
-                </div>
+                <SelectFund />
               </StepContent>
             </Step>
             <Step key={'1'}>
               <StepLabel>Invest or Withdraw</StepLabel>
               <StepContent>
-                <div>
-                  <div>
-                    <Button 
-                      size = "md" 
-                      color = "secondary"
-                      onClick = {() => setState({ ...state, activeStep: 0 })}
-                    >
-                      Cancel
-                    </Button>
-                  </div>
-                </div>
+                <SelectedFund />
               </StepContent>
             </Step>
         </Stepper>
       </ThemeProvider>
-      
-      {submitting ? 
-      <>
-        <Loader size="md" /><br/>
-        <Button size="lg" color="secondary" onClick={() => {setSubmitting(false)}}>Cancel</Button>
-      </>
-      : 
-      <Button size="lg" color="primary" onClick={submitTx}>Submit</Button>
-      }
     </Container>
   )
 };
