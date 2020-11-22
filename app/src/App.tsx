@@ -18,7 +18,7 @@ const App: React.FC = () => {
                     <Title size="md">Waiting for Safe...</Title>
                     <Loader size="md" />
                 </>
-                )}>
+            )}>
                 <GlobalState.Provider value={[state, setState]}>
                     <StepperContainer />
                 </GlobalState.Provider>
