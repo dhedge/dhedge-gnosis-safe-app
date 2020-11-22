@@ -23,6 +23,10 @@ const GlobalStyle = createGlobalStyle`
         width: 100% !important;
     }
 
+    .full-width {
+        width: 100%
+    }
+
     @font-face {
         font-family: 'Averta';
         src: local('Averta'), local('Averta Bold'),
