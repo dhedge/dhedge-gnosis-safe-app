@@ -23,8 +23,11 @@ const GlobalStyle = createGlobalStyle`
         width: 100% !important;
     }
 
-    .full-width {
-        width: 100%
+    .row-title {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between
     }
 
     @font-face {

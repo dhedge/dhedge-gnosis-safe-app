@@ -1,12 +1,21 @@
 import React, { useContext, useState } from 'react'
-import { Button, Tab } from "@gnosis.pm/safe-react-components"
+import { Button, Tab, Title, Text } from "@gnosis.pm/safe-react-components"
 import { GlobalState } from 'GlobalState'
 
 const SelectedFund: React.FC = () => { 
     const [state, setState] = useContext(GlobalState)
     const [selected, setSelected] = useState('1');
+    const poolTitle = "Convex Strategies Pool"
+    const percent = 34
     return (
-        <div>
+        <>
+            <div className = "row-title">
+                <Title size="md">{poolTitle}</Title>
+                <Text size="xl" color= { percent < 0 ? "error" : 'primary'}>
+                    {`${percent}%`}
+                </Text>
+            </div>
+            
             <Tab
                 onChange={setSelected}
                 selectedTab={selected}
@@ -24,7 +33,7 @@ const SelectedFund: React.FC = () => {
             >
                 Cancel
             </Button>
-        </div>
+        </>
     )
 }
 
