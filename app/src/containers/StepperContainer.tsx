@@ -26,37 +26,26 @@ const theme = createMuiTheme({
   },
 });
 
-const Container = styled.form`
-  margin-bottom: 2rem;
-  width: 100%;
-  max-width: 480px;
-
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-column-gap: 1rem;
-  grid-row-gap: 1rem;
-`;
-
 const StepperContainer: React.FC = () => {
   const [state] = useContext(GlobalState)
 
   return (
-      <ThemeProvider theme={theme}>
-        <Stepper activeStep={state.activeStep} orientation="vertical">
-            <Step key={'0'}>
-              <StepLabel>Select Pool</StepLabel>
-              <StepContent>
-                <SelectFund />
-              </StepContent>
-            </Step>
-            <Step key={'1'}>
-              <StepLabel>Invest or Withdraw</StepLabel>
-              <StepContent>
-                <SelectedFund />
-              </StepContent>
-            </Step>
-        </Stepper>
-      </ThemeProvider>
+    <ThemeProvider theme={theme}>
+      <Stepper activeStep={state.activeStep} orientation="vertical">
+          <Step key={'0'}>
+            <StepLabel>Select Pool</StepLabel>
+            <StepContent>
+              <SelectFund />
+            </StepContent>
+          </Step>
+          <Step key={'1'}>
+            <StepLabel>Invest or Withdraw</StepLabel>
+            <StepContent>
+              <SelectedFund />
+            </StepContent>
+          </Step>
+      </Stepper>
+    </ThemeProvider>
   )
 };
 
