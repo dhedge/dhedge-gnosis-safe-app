@@ -29,8 +29,24 @@ const GlobalStyle = createGlobalStyle`
         align-items: center;
     }
 
-    .pd-l-small {
-        padding-left: 10px
+    .mg-r-small {
+        margin-right: 8px;
+    }
+
+    .flex-row {
+        display: flex;
+        flex direction: row;
+    }
+
+    .select-width {
+        width: 80px;
+    }
+
+    .confirm-button-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        padding: 16px;
     }
 
     @font-face {

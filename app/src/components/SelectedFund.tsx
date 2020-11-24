@@ -23,12 +23,13 @@ const SelectedFund: React.FC = () => {
     return (
         <Container>
             <div className = "row-title">
-                <Title size="md">{poolTitle}</Title>
-                <div className="pd-l-small">
-                    <Text size="xl" color= { percent < 0 ? "error" : 'primary'} >
-                        {`${percent}%`}
-                    </Text>
+                <div className="mg-r-small">
+                    <Title size="md">{poolTitle}</Title>
                 </div>
+                <Text size="xl" color= { percent < 0 ? "error" : 'primary'} >
+                    {`${percent}%`}
+                </Text>
+                
             </div>
             
             <Tab
