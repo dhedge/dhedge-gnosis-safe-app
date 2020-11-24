@@ -1,6 +1,19 @@
 import React, { useContext, useState } from 'react'
 import { Button, Tab, Title, Text } from "@gnosis.pm/safe-react-components"
 import { GlobalState } from 'GlobalState'
+import styled from "styled-components";
+import Invest from './Invest'
+import Withdraw from './Withdraw'
+
+const Container = styled.form`
+  margin-bottom: 2rem;
+  width: 100%;
+  max-width: 480px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
+`;
 
 const SelectedFund: React.FC = () => { 
     const [state, setState] = useContext(GlobalState)
@@ -8,7 +21,7 @@ const SelectedFund: React.FC = () => {
     const poolTitle = "Convex Strategies Pool"
     const percent = 34
     return (
-        <>
+        <Container>
             <div className = "row-title">
                 <Title size="md">{poolTitle}</Title>
                 <div className="pd-l-small">
@@ -27,15 +40,9 @@ const SelectedFund: React.FC = () => {
                     { id: '2', label: 'Withdraw'}
                 ]}
             />
-            { selected }
-            <Button 
-                size = "md" 
-                color = "secondary"
-                onClick = {() => setState({ ...state, activeStep: 0 })}
-            >
-                Cancel
-            </Button>
-        </>
+            { selected === '1' ? <Invest /> : <Withdraw /> }
+            
+        </ Container>
     )
 }
 
