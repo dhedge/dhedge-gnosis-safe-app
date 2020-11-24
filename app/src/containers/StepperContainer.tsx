@@ -41,7 +41,6 @@ const StepperContainer: React.FC = () => {
   const [state] = useContext(GlobalState)
 
   return (
-    <Container>
       <ThemeProvider theme={theme}>
         <Stepper activeStep={state.activeStep} orientation="vertical">
             <Step key={'0'}>
@@ -58,7 +57,6 @@ const StepperContainer: React.FC = () => {
             </Step>
         </Stepper>
       </ThemeProvider>
-    </Container>
   )
 };
 

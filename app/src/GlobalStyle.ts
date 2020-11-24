@@ -27,7 +27,10 @@ const GlobalStyle = createGlobalStyle`
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: space-between
+    }
+
+    .pd-l-small {
+        padding-left: 10px
     }
 
     @font-face {

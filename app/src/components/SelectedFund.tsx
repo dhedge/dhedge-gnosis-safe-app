@@ -11,9 +11,11 @@ const SelectedFund: React.FC = () => {
         <>
             <div className = "row-title">
                 <Title size="md">{poolTitle}</Title>
-                <Text size="xl" color= { percent < 0 ? "error" : 'primary'}>
-                    {`${percent}%`}
-                </Text>
+                <div className="pd-l-small">
+                    <Text size="xl" color= { percent < 0 ? "error" : 'primary'} >
+                        {`${percent}%`}
+                    </Text>
+                </div>
             </div>
             
             <Tab
