@@ -1,51 +1,30 @@
-import React, { useCallback, useState } from 'react';
-import styled from "styled-components";
-import { Button, Loader, Title } from "@gnosis.pm/safe-react-components";
-import { useSafe } from '@rmeissner/safe-apps-react-sdk';
+import React, { useState } from "react";
+import { ThemeProvider } from "styled-components";
+import { theme } from "@gnosis.pm/safe-react-components";
+import { Loader, Title } from "@gnosis.pm/safe-react-components";
+import SafeProvider from '@rmeissner/safe-apps-react-sdk';
+import GlobalStyle from "./GlobalStyle";
+import StepperContainer from "containers/StepperContainer";
+import { GlobalState, initialState } from 'GlobalState'
 
-const Container = styled.form`
-  margin-bottom: 2rem;
-  width: 100%;
-  max-width: 480px;
 
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-column-gap: 1rem;
-  grid-row-gap: 1rem;
-`;
+const App: React.FC = () => { 
+    const [state, setState] = useState(initialState)
+    return (
+        <ThemeProvider theme={theme}>
+            <GlobalStyle />
+            <SafeProvider loading={(
+                <>
+                    <Title size="md">Waiting for Safe...</Title>
+                    <Loader size="md" />
+                </>
+            )}>
+                <GlobalState.Provider value={[state, setState]}>
+                    <StepperContainer />
+                </GlobalState.Provider>
+            </SafeProvider>
+        </ThemeProvider>
+    )
+}
 
-const App: React.FC = () => {
-  const safe = useSafe()  
-  const [submitting, setSubmitting] = useState(false)
-  const submitTx = useCallback(async () => {
-    setSubmitting(true)
-    try {
-      const safeTxHash = await safe.sendTransactions([
-        {
-          "to": safe.info.safeAddress,
-          "value": "0",
-          "data": "0x"
-        }
-      ])
-      console.log({safeTxHash})
-      const safeTx = await safe.loadSafeTransaction(safeTxHash)
-      console.log({safeTx})
-    } catch (e) {
-      console.error(e)
-    }
-    setSubmitting(false)
-  }, [safe])
-  return <Container>
-    <Title size="md">{safe.info.safeAddress}</Title>
-    {submitting ? 
-    <>
-      <Loader size="md" /><br/>
-      <Button size="lg" color="secondary" onClick={() => {setSubmitting(false)}}>Cancel</Button>
-    </>
-    : 
-    <Button size="lg" color="primary" onClick={submitTx}>Submit</Button>
-    }
-  </Container>
-};
-
-export default App;
+export default App

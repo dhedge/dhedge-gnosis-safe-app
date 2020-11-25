@@ -23,6 +23,36 @@ const GlobalStyle = createGlobalStyle`
         width: 100% !important;
     }
 
+    .row-title {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .mg-r-small {
+        margin-right: 8px;
+    }
+
+    .mg-b-small {
+        margin-bottom: 16px;
+    }
+
+    .flex-row {
+        display: flex;
+        flex direction: row;
+    }
+
+    .select-width {
+        width: 80px;
+    }
+
+    .confirm-button-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        padding: 16px;
+    }
+
     @font-face {
         font-family: 'Averta';
         src: local('Averta'), local('Averta Bold'),
