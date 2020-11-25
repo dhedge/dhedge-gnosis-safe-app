@@ -18,7 +18,6 @@ const SelectFund: React.FC = () => {
 
     return (
         <>
-            <Title size="md">Enter pool contract</Title>
             <TextField
                     id="standard-amount"
                     label="Pool Contract Address"
