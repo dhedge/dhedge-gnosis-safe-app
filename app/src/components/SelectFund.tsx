@@ -1,14 +1,6 @@
-import React, { useContext } from 'react'
-import { Button} from "@gnosis.pm/safe-react-components"
+import React, { useContext, useState } from 'react'
+import { Button, TextField, Title } from "@gnosis.pm/safe-react-components"
 import { GlobalState } from 'GlobalState'
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableFooter from '@material-ui/core/TableFooter';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 
 interface Row {
     pool: string;
@@ -22,52 +14,27 @@ const createRow: (pool: string, totalReturn: string, fees: string) => Row = (poo
 
 const SelectFund: React.FC = () => { 
     const [state, setState] = useContext(GlobalState)
-
-    
-
-    const headerCells = [{
-
-    }]
-
-    const rows = [
-        createRow('Convex Strategies', '34.5', '20')
-    ]
+    const [contract, setContract] = useState('');
 
     return (
-        <div>
-            <TableContainer> 
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Pool</TableCell>
-                            <TableCell align="right">Return</TableCell>
-                            <TableCell align="right">Fees</TableCell>
-                            <TableCell align="right"></TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {rows.map((row) => (
-                            <TableRow key={row.pool}>
-                                <TableCell component="th" scope="row">
-                                    {row.pool}
-                                </TableCell>
-                                <TableCell align="right">{`${row.totalReturn} %`}</TableCell>
-                                <TableCell align="right">{row.fees}</TableCell>
-                                <TableCell align="right">
-                                    <Button 
-                                        size = "md" 
-                                        color = "secondary"
-                                        onClick = {() => setState({ ...state, activeStep: 1 })}
-                                    >
-                                        Select
-                                    </Button>
-                                </TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-        </div>
+        <>
+            <Title size="md">Enter pool contract</Title>
+            <TextField
+                    id="standard-amount"
+                    label="Pool Contract Address"
+                    value={contract}
+                    onChange={(e) => setContract(e.target.value)}
+                />
+            <div className="confirm-button-container">
+                <Button 
+                    size = "md" 
+                    color = "primary"
+                    onClick = {() => setState({ ...state, activeStep: 1 })}
+                >
+                    Select
+                </Button>
+            </div>
+        </>
     )
 }
 

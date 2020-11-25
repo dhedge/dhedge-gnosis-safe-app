@@ -33,6 +33,10 @@ const GlobalStyle = createGlobalStyle`
         margin-right: 8px;
     }
 
+    .mg-b-small {
+        margin-bottom: 16px;
+    }
+
     .flex-row {
         display: flex;
         flex direction: row;

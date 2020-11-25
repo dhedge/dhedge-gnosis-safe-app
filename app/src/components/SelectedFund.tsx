@@ -5,15 +5,7 @@ import styled from "styled-components";
 import Invest from './Invest'
 import Withdraw from './Withdraw'
 
-const Container = styled.form`
-  margin-bottom: 2rem;
-  width: 100%;
-  max-width: 480px;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-column-gap: 1rem;
-  grid-row-gap: 1rem;
-`;
+
 
 const SelectedFund: React.FC = () => { 
     const [state, setState] = useContext(GlobalState)
@@ -21,7 +13,7 @@ const SelectedFund: React.FC = () => {
     const poolTitle = "Convex Strategies Pool"
     const percent = 34
     return (
-        <Container>
+        <>
             <div className = "row-title">
                 <div className="mg-r-small">
                     <Title size="md">{poolTitle}</Title>
@@ -29,9 +21,9 @@ const SelectedFund: React.FC = () => {
                 <Text size="xl" color= { percent < 0 ? "error" : 'primary'} >
                     {`${percent}%`}
                 </Text>
-                
             </div>
             
+            <div className = "mg-b-small">
             <Tab
                 onChange={setSelected}
                 selectedTab={selected}
@@ -41,9 +33,9 @@ const SelectedFund: React.FC = () => {
                     { id: '2', label: 'Withdraw'}
                 ]}
             />
+            </div>
             { selected === '1' ? <Invest /> : <Withdraw /> }
-            
-        </ Container>
+        </>
     )
 }
 
