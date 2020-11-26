@@ -33,6 +33,7 @@ const SelectFund: React.FC = () => {
                     size = "md"
                     color = "primary"
                     onClick = {confirmSelection}
+                    disabled = {!etherAddressFormat.test(contractValue)}
                 >
                     Select
                 </Button>

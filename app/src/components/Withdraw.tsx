@@ -52,6 +52,7 @@ const Withdraw: React.FC = () => {
                     size = "md"
                     color = "primary"
                     onClick = {handleCancel}
+                    disabled = {amount === '' || amount === '0'}
                 >
                     Withdraw
                 </Button>

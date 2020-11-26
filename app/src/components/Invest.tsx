@@ -50,6 +50,7 @@ const Invest: React.FC = () => {
                     size = "md"
                     color = "primary"
                     onClick = {handleCancel}
+                    disabled = {amount === '' || amount === '0'}
                 >
                     Invest
                 </Button>
