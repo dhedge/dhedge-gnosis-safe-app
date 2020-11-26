@@ -1,8 +1,5 @@
 import React, { createContext } from 'react'
-
-interface StateInterface {
-    activeStep?: number
-}
+import { StateInterface } from 'types/state.types';
 
 const initialState: StateInterface = {
     activeStep: 0
