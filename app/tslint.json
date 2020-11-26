@@ -1,9 +1,13 @@
 {
     "defaultSeverity": "error",
     "extends": [
-        "tslint:recommended"
+        "tslint:latest",
+        "tslint-react"
     ],
     "jsRules": {},
-    "rules": {},
+    "rules": {
+        "no-implicit-dependencies": false,
+        "no-submodule-imports": false
+    },
     "rulesDirectory": []
 }

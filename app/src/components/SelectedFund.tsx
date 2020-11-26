@@ -1,13 +1,9 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { Tab, Title, Text } from "@gnosis.pm/safe-react-components"
-import { GlobalState } from 'GlobalState'
 import Invest from './Invest'
 import Withdraw from './Withdraw'
 
-
-
 const SelectedFund: React.FC = () => {
-    const [state, setState] = useContext(GlobalState)
     const [selected, setSelected] = useState('1');
     const poolTitle = "Convex Strategies Pool"
     const percent = 34
