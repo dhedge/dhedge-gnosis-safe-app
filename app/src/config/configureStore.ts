@@ -8,6 +8,8 @@ import ERC20 from 'contracts/ERC20.json'
 // configure initial state
 const configureStore = async () => {
     const web3 = new Web3(Web3.givenProvider || 'https://api.mycryptoapi.com/eth')
+    console.log(ERC20);
+    console.log(getAbi(ERC20))
     const sUSDContract = new web3.eth.Contract(getAbi(ERC20), SYNTH_ADDRESS.mainnet.SUSD)
     const initialState: StateInterface = {
       ...state,
@@ -19,3 +21,4 @@ const configureStore = async () => {
 }
   
   export { configureStore }
+  
