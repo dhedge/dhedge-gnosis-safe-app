@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Button, TextField, Title } from "@gnosis.pm/safe-react-components"
+import { Button, TextField } from "@gnosis.pm/safe-react-components"
 import { GlobalState } from 'GlobalState'
 
 interface Row {
@@ -8,11 +8,7 @@ interface Row {
     fees: string;
 }
 
-const createRow: (pool: string, totalReturn: string, fees: string) => Row = (pool, totalReturn, fees) => {
-    return { pool, totalReturn, fees }
-}
-
-const SelectFund: React.FC = () => { 
+const SelectFund: React.FC = () => {
     const [state, setState] = useContext(GlobalState)
     const [contract, setContract] = useState('');
 
@@ -25,8 +21,8 @@ const SelectFund: React.FC = () => {
                     onChange={(e) => setContract(e.target.value)}
                 />
             <div className="confirm-button-container">
-                <Button 
-                    size = "md" 
+                <Button
+                    size = "md"
                     color = "primary"
                     onClick = {() => setState({ ...state, activeStep: 1 })}
                 >

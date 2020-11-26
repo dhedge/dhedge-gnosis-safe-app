@@ -6,11 +6,13 @@ const items = [
     { id: '1', label: 'Pool' }
 ];
 
-const Withdraw: React.FC = () => { 
+const Withdraw: React.FC = () => {
     const [state, setState] = useContext(GlobalState)
     const [amount, setAmount] = useState('');
     const [activeItemId, setActiveItemId] = useState('1')
-    const onSubmit = () => {}
+    const onSubmit = () => {
+        return
+    }
     return (
         <form noValidate autoComplete="off" onSubmit={onSubmit}>
             <div className = "flex-row">
@@ -32,16 +34,16 @@ const Withdraw: React.FC = () => {
             </div>
             <div className="confirm-button-container">
                 <div className="mg-r-small">
-                    <Button 
-                        size = "md" 
+                    <Button
+                        size = "md"
                         color = "secondary"
                         onClick = {() => setState({ ...state, activeStep: 0 })}
                     >
                         Cancel
                     </Button>
                 </div>
-                <Button 
-                    size = "md" 
+                <Button
+                    size = "md"
                     color = "primary"
                     onClick = {() => setState({ ...state, activeStep: 0 })}
                 >
