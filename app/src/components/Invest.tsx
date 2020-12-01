@@ -13,7 +13,9 @@ const Invest: React.FC = () => {
     const [activeItemId, setActiveItemId] = useState('1')
     const handleSetId = (id: string) => setActiveItemId(id)
     const handleSetAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
-        positiveNumberFormat.test(e.target.value) && setAmount(e.target.value)
+        if (positiveNumberFormat.test(e.target.value)) {
+            setAmount(e.target.value)
+        }
     }
     const handleCancel = () => setState({ ...state, activeStep: 0 })
     const onSubmit = () => {

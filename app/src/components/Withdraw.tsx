@@ -15,9 +15,11 @@ const Withdraw: React.FC = () => {
     const handleCancel = () => setState({ ...state, activeStep: 0 })
     const handleSetId = (id: string) => setActiveItemId(id)
     const handleSetAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
-        positiveNumberFormat.test(e.target.value) && setAmount(e.target.value)
+        if (positiveNumberFormat.test(e.target.value)) {
+            setAmount(e.target.value)
+        }
     }
-        
+
     const onSubmit = () => {
         return
     }
