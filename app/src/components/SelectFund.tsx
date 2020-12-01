@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect, useCallback } from 'react'
 import { Button, TextField, Title, Text } from "@gnosis.pm/safe-react-components"
 import { GlobalState } from 'GlobalState'
-import { etherAddressFormat } from 'utils/regex'
 import { getAbi } from 'utils/fn'
 import DHedge from 'contracts/DHedge.json'
 
@@ -60,7 +59,7 @@ const SelectFund: React.FC = () => {
                     size = "md"
                     color = "primary"
                     onClick = {confirmSelection}
-                    disabled = {!(etherAddressFormat.test(contractAddress) && poolName)}
+                    disabled = {!(web3.utils.isAddress(contractAddress) && poolName)}
                 >
                     Select
                 </Button>
