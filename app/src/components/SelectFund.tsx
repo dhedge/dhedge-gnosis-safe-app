@@ -33,12 +33,12 @@ const SelectFund: React.FC = () => {
     }
 
     useEffect(() => {
-        if (etherAddressFormat.test(contractAddress)) {
+        if (web3.utils.isAddress(contractAddress)) {
             getNames()
         } else {
             resetValues()
         }
-    }, [contractAddress, getNames]);
+    }, [contractAddress, getNames, web3]);
 
     return (
         <>
