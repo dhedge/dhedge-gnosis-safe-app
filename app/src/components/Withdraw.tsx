@@ -11,7 +11,7 @@ const items = [
 ];
 
 const Withdraw: React.FC = () => {
-    const safe = useSafe()  
+    const safe = useSafe()
     const [state, setState] = useContext(GlobalState)
     const { web3, poolContractAddress, appsSdk } = state
     const [amount, setAmount] = useState('')
@@ -43,8 +43,7 @@ const Withdraw: React.FC = () => {
                 web3.utils.toWei(amount)
             ).encodeABI(),
         }]
-        const message = appsSdk.sendTransactions(txs);
-        console.log(message);
+        appsSdk.sendTransactions(txs);
     }
 
     const getBalance = useCallback(async () => {

@@ -57,8 +57,7 @@ const Invest: React.FC = () => {
                 web3.utils.toWei(amount)
             ).encodeABI(),
         }]
-        const message = appsSdk.sendTransactions(txs);
-        console.log(message);
+        appsSdk.sendTransactions(txs);
     }
 
     useEffect(() => {
