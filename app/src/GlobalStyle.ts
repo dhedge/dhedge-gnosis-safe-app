@@ -61,6 +61,10 @@ const GlobalStyle = createGlobalStyle`
         padding: 16px;
     }
 
+    .padding-16 {
+        padding: 16px
+    }
+
     .button-link {
         background: none!important;
         border: none;

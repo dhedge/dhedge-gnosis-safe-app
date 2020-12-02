@@ -35,7 +35,7 @@ const SelectedFund: React.FC = () => {
     }, [getNames])
 
     return (
-        <>
+        <div className = "padding-16">
             <div className="mg-b-small">
                 <div className = "row-title">
                     <div className="mg-r-small">
@@ -56,7 +56,7 @@ const SelectedFund: React.FC = () => {
                 />
             </div>
             { selected === '1' ? <Invest /> : <Withdraw /> }
-        </>
+        </div>
     )
 }
 

@@ -40,7 +40,7 @@ const SelectFund: React.FC = () => {
     }, [contractAddress, getNames, web3]);
 
     return (
-        <>
+        <div className = "padding-16">
             {poolName && (
                 <div className="mg-b-small">
                     <Title size="sm">{poolName}</Title>
@@ -63,7 +63,7 @@ const SelectFund: React.FC = () => {
                     Select
                 </Button>
             </div>
-        </>
+        </div>
     )
 }
 
