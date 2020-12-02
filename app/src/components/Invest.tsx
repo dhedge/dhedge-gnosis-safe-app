@@ -3,8 +3,8 @@ import { Button, TextField, Select, Text } from "@gnosis.pm/safe-react-component
 import { useSafe } from '@rmeissner/safe-apps-react-sdk'
 import { Transaction } from 'types/state.types'
 import { GlobalState } from 'GlobalState'
-import { positiveNumberFormat } from 'utils/regex'
 import { SYNTH_ADDRESS } from 'utils/const'
+import { validNum } from 'utils/fn'
 import { useContracts } from 'hooks/useContracts'
 
 const items = [
@@ -12,17 +12,18 @@ const items = [
 ];
 
 const Invest: React.FC = () => {
-    const safe = useSafe()  
+    const safe = useSafe()
     const [state, setState] = useContext(GlobalState)
     const { web3, poolContractAddress, appsSdk } = state
     const [amount, setAmount] = useState('')
     const [balance, setBalance] = useState('0')
     const [activeItemId, setActiveItemId] = useState('1')
-
     const { contractSusd, contractDhedge } = useContracts()
 
     const handleSetId = (id: string) => setActiveItemId(id)
-    const validNum: (value: string) => boolean = value => positiveNumberFormat.test(value)
+    const handleCancel = () => setState({ ...state, activeStep: 0 })
+    const setAmountBalance = () => setAmount(balance);
+
     const handleSetAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (validNum(e.target.value)) {
             if (parseFloat(e.target.value) <= parseFloat(balance)) {
@@ -34,21 +35,18 @@ const Invest: React.FC = () => {
             }
         }
     }
-    const handleCancel = () => setState({ ...state, activeStep: 0 })
 
-    const setAmountBalance = () => setAmount(balance);
-
-    const getSUSDBalance = useCallback(async () => {
+    const getBalance = useCallback(async () => {
         const susdBalance = await contractSusd.methods.balanceOf(safe.info.safeAddress).call()
         setBalance(web3.utils.fromWei(susdBalance));
     }, [safe, web3, contractSusd])
 
-    const onSubmit = () => {
+    const onSubmit = async () => {
         const txs: Transaction[] = [{
             to: SYNTH_ADDRESS.mainnet.SUSD || '',
             value: '0',
             data: contractSusd.methods.approve(
-                safe.info.safeAddress,
+                poolContractAddress,
                 web3.utils.toWei(amount)
             ).encodeABI(),
         },
@@ -64,8 +62,8 @@ const Invest: React.FC = () => {
     }
 
     useEffect(() => {
-        getSUSDBalance()
-    }, [getSUSDBalance])
+        getBalance()
+    }, [getBalance])
 
     return (
         <>
