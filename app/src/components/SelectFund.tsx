@@ -45,15 +45,14 @@ const SelectFund: React.FC = () => {
                 <div className="mg-b-small">
                     <Title size="sm">{poolName}</Title>
                     <Text size="lg">{`Managed by ${poolManager}`}</Text>
-
                 </div>
             )}
             <TextField
-                    id="standard-amount"
-                    label="Pool Contract Address"
-                    value={contractAddress}
-                    onChange={updateTextField}
-                />
+                id="standard-amount"
+                label="Pool Contract Address"
+                value={contractAddress}
+                onChange={updateTextField}
+            />
             <div className="confirm-button-container">
                 <Button
                     size = "md"
