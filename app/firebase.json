@@ -1,0 +1,49 @@
+{
+  "hosting": {
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "/service-worker.js", 
+        "headers": [{ 
+          "key": "Cache-Control", 
+          "value": "no-cache" 
+        }]},
+      {
+        "source": "/manifest.json",
+        "headers": [{
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },{
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET"
+        },{
+          "key": "Access-Control-Allow-Headers",
+          "value": "X-Requested-With, content-type, Authorization"
+        }]
+      },{
+        "source": "**/*.@(svg|png)",
+        "headers": [{
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },{
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET"
+        },{
+          "key": "Access-Control-Allow-Headers",
+          "value": "X-Requested-With, content-type, Authorization"
+        }]
+      }
+    ]
+  }
+}
