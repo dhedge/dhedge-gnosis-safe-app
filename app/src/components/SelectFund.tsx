@@ -1,40 +1,69 @@
-import React, { useContext, useState } from 'react'
-import { Button, TextField, Title } from "@gnosis.pm/safe-react-components"
+import React, { useContext, useState, useEffect, useCallback } from 'react'
+import { Button, TextField, Title, Text } from "@gnosis.pm/safe-react-components"
 import { GlobalState } from 'GlobalState'
+import { getAbi } from 'utils/fn'
+import DHedge from 'contracts/DHedge.json'
 
-interface Row {
-    pool: string;
-    totalReturn: string;
-    fees: string;
-}
-
-const createRow: (pool: string, totalReturn: string, fees: string) => Row = (pool, totalReturn, fees) => {
-    return { pool, totalReturn, fees }
-}
-
-const SelectFund: React.FC = () => { 
+const SelectFund: React.FC = () => {
     const [state, setState] = useContext(GlobalState)
-    const [contract, setContract] = useState('');
+    const [contractAddress, setContractAddress] = useState('');
+    const [poolName, setPoolName] = useState('');
+    const [poolManager, setPoolManager] = useState('');
+    const { web3 } = state;
+
+    const confirmSelection = () => setState({ ...state, activeStep: 1, poolContractAddress: contractAddress });
+    const updateTextField = (e: React.ChangeEvent<HTMLInputElement>) => setContractAddress(e.target.value)
+
+    const getNames = useCallback(async () => {
+        try {
+            const contract = new web3.eth.Contract(getAbi(DHedge), contractAddress);
+            const name = await contract.methods.name().call();
+            const managerName = await contract.methods.managerName().call();
+            setPoolName(name);
+            setPoolManager(managerName);
+        } catch (err) {
+            resetValues();
+        }
+    }, [web3, contractAddress]);
+
+    const resetValues = () => {
+        setPoolName('');
+        setPoolManager('');
+    }
+
+    useEffect(() => {
+        if (web3.utils.isAddress(contractAddress)) {
+            getNames()
+        } else {
+            resetValues()
+        }
+    }, [contractAddress, getNames, web3]);
 
     return (
-        <>
-            <Title size="md">Enter pool contract</Title>
+        <div className = "padding-16">
+            {poolName && (
+                <div className="mg-b-small">
+                    <Title size="sm">{poolName}</Title>
+                    <Text size="lg">{`Managed by ${poolManager}`}</Text>
+                </div>
+            )}
             <TextField
-                    id="standard-amount"
-                    label="Pool Contract Address"
-                    value={contract}
-                    onChange={(e) => setContract(e.target.value)}
-                />
+                id="standard-amount"
+                label="Pool Contract Address"
+                value={contractAddress}
+                onChange={updateTextField}
+            />
             <div className="confirm-button-container">
-                <Button 
-                    size = "md" 
+                <Button
+                    size = "md"
                     color = "primary"
-                    onClick = {() => setState({ ...state, activeStep: 1 })}
+                    onClick = {confirmSelection}
+                    disabled = {!(web3.utils.isAddress(contractAddress) && poolName)}
                 >
                     Select
                 </Button>
             </div>
-        </>
+        </div>
     )
 }
 

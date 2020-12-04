@@ -5,11 +5,15 @@ import { Loader, Title } from "@gnosis.pm/safe-react-components";
 import SafeProvider from '@rmeissner/safe-apps-react-sdk';
 import GlobalStyle from "./GlobalStyle";
 import StepperContainer from "containers/StepperContainer";
-import { GlobalState, initialState } from 'GlobalState'
+import { GlobalState } from 'GlobalState'
+import { StateInterface } from 'types/state.types';
 
+interface IProps {
+    initialState: StateInterface;
+}
 
-const App: React.FC = () => { 
-    const [state, setState] = useState(initialState)
+const App: React.FC<IProps> = props => { 
+    const [state, setState] = useState(props.initialState)
     return (
         <ThemeProvider theme={theme}>
             <GlobalStyle />

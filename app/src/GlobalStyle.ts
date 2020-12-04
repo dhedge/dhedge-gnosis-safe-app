@@ -37,9 +37,17 @@ const GlobalStyle = createGlobalStyle`
         margin-bottom: 16px;
     }
 
+    .mg-b-smaller {
+        margin-bottom: 4px;
+    }
+
     .flex-row {
         display: flex;
         flex direction: row;
+    }
+
+    .flex-end {
+        justify-content: flex-end;
     }
 
     .select-width {
@@ -51,6 +59,18 @@ const GlobalStyle = createGlobalStyle`
         flex-direction: row;
         justify-content: flex-end;
         padding: 16px;
+    }
+
+    .padding-16 {
+        padding: 16px
+    }
+
+    .button-link {
+        background: none!important;
+        border: none;
+        padding: 0!important;
+        text-decoration: underline;
+        cursor: pointer;
     }
 
     @font-face {

@@ -1,7 +1,7 @@
 {
-  "short_name": "Safe App",
-  "name": "dHedge",
-  "description": "Describe your Safe App here",
+  "short_name": "dHEDGE",
+  "name": "dHEDGE",
+  "description": "Decentralized asset management",
   "iconPath": "logo.svg",
   "icons": [
     {

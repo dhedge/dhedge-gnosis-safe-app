@@ -28,7 +28,7 @@ const theme = createMuiTheme({
 const Container = styled.form`
   margin-bottom: 2rem;
   width: 100%;
-  max-width: 480px;
+  max-width: 620px;
   display: grid;
   grid-template-columns: 1fr;
   grid-column-gap: 1rem;
