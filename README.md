@@ -8,7 +8,7 @@ First select a pool you want to interact with:
 Then select the amount of sUSD to invest (or amount of pool tokens to return and withdraw):
 <img width="846" alt="Screenshot 2020-12-03 at 2 50 30 pm" src="https://user-images.githubusercontent.com/246085/101435008-b2d65780-395f-11eb-8336-c9b4a7275d48.png">
 
-You will notice two transactions for investing (sUSD `approve` and `deposit` calls):
+You will notice two transactions for investing (sUSD `approve` and `deposit` calls) and one for withdrawing:
 <img width="517" alt="Screenshot 2020-12-03 at 2 50 39 pm" src="https://user-images.githubusercontent.com/246085/101435005-b1a52a80-395f-11eb-8883-51fe6d79bfa4.png">
 
 And finally, it should appear in the transaction screen waiting for confirmations/execution.
