@@ -1,4 +1,4 @@
-# dHEDGE App For Gnosis Safe App
+# dHEDGE App For Gnosis Safe
 
 At current version it allows to invest and withdraw from pools.
 
