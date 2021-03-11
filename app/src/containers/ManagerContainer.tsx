@@ -18,7 +18,7 @@ const ManagerContainer: React.FC = () => {
           </StepContent>
         </Step>
         <Step key={'1'}>
-          <StepLabel>Invest or Withdraw</StepLabel>
+          <StepLabel>Manage Pool</StepLabel>
           <StepContent>
             <SelectedFund />
           </StepContent>

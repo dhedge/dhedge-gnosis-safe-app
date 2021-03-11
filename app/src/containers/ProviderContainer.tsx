@@ -53,7 +53,7 @@ const StepperContainer: React.FC = () => {
               ]}
           />
         </div>
-        { selected === '1' ? <InvestorContainer /> : <InvestorContainer /> }
+        { selected === '1' ? <InvestorContainer /> : <ManagerContainer /> }
       </Container>
     </ThemeProvider>
   )
