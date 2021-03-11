@@ -35,7 +35,6 @@ const Container = styled.form`
 `;
 
 const StepperContainer: React.FC = () => {
-  const [state] = useContext(GlobalState);
   const [selected, setSelected] = useState('1');
 
   return (
