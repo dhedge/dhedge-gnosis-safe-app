@@ -1,10 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import { Tab, Title, Icon } from '@gnosis.pm/safe-react-components'
+import { Tab, Title } from '@gnosis.pm/safe-react-components'
 import styled from "styled-components";
 
 import { GlobalState } from 'GlobalState';
 import InvestorContainer from './InvestorContainer';
+import ManagerContainer from './ManagerContainer';
 
 const theme = createMuiTheme({
   palette: {
