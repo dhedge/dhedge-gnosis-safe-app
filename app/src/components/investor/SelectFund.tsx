@@ -1,9 +1,6 @@
-import React, { useContext, useState, useEffect, useCallback } from 'react'
-import { Button, TextField, Title, Text } from "@gnosis.pm/safe-react-components"
+import React, { useContext } from 'react'
 
 import { GlobalState } from 'GlobalState'
-import { getAbi } from 'utils/fn'
-import DHedge from 'contracts/DHedge.json'
 import { PoolSelectionInput } from "components/forms"
 
 const SelectFund: React.FC = () => {

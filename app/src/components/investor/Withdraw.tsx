@@ -1,6 +1,6 @@
 import React, { useContext, useState, useCallback, useEffect } from 'react'
 import { Button, TextField, Select, Text } from '@gnosis.pm/safe-react-components'
-import { useSafe } from '@rmeissner/safe-apps-react-sdk'
+import { useSafeAppsSDK } from '@gnosis.pm/safe-apps-react-sdk';
 import { GlobalState } from 'GlobalState'
 import { validNum } from 'utils/fn'
 import { useContracts } from 'hooks/useContracts'
@@ -11,9 +11,9 @@ const items = [
 ];
 
 const Withdraw: React.FC = () => {
-    const safe = useSafe()
+    const { safe, sdk } = useSafeAppsSDK()
     const [state, setState] = useContext(GlobalState)
-    const { web3, poolContractAddress, appsSdk } = state
+    const { web3, poolContractAddress } = state
     const [amount, setAmount] = useState('')
     const [activeItemId, setActiveItemId] = useState('1')
     const [balance, setBalance] = useState('0')
@@ -36,18 +36,22 @@ const Withdraw: React.FC = () => {
     }
 
     const onSubmit = async () => {
-        const txs: Transaction[] = [{
-            to: poolContractAddress || '',
-            value: '0',
-            data: contractDhedge.methods.withdraw(
-                web3.utils.toWei(amount)
-            ).encodeABI(),
-        }]
-        appsSdk.sendTransactions(txs);
+        try {
+            const txs: Transaction[] = [{
+                to: poolContractAddress || '',
+                value: '0',
+                data: contractDhedge.methods.withdraw(
+                    web3.utils.toWei(amount)
+                ).encodeABI(),
+            }]
+            await sdk.txs.send({ txs });
+        } catch (err) {
+            console.error(err.message);
+        }
     }
 
     const getBalance = useCallback(async () => {
-        const poolBalance = await contractDhedge.methods.balanceOf(safe.info.safeAddress).call()
+        const poolBalance = await contractDhedge.methods.balanceOf(safe.safeAddress).call()
         setBalance(web3.utils.fromWei(poolBalance));
     }, [safe, web3, contractDhedge])
 
