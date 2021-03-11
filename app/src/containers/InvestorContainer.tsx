@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { FC, useContext } from 'react';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -6,7 +6,7 @@ import StepContent from '@material-ui/core/StepContent';
 import { GlobalState } from 'GlobalState';
 import { SelectFund, SelectedFund } from 'components/investor';
 
-const InvestorContainer: React.FC = () => {
+const InvestorContainer: FC = () => {
   const [state] = useContext(GlobalState)
 
   return (

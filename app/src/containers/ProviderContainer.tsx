@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import { FC } from 'react';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-// import { Tab, Title } from '@gnosis.pm/safe-react-components'
 import styled from "styled-components";
 
 import InvestorContainer from './InvestorContainer';
-// import ManagerContainer from './ManagerContainer';
 
 const theme = createMuiTheme({
   palette: {
@@ -33,27 +31,10 @@ const Container = styled.form`
   grid-row-gap: 1rem;
 `;
 
-const StepperContainer: React.FC = () => {
-  //const [selected, setSelected] = useState('1');
-
+const StepperContainer: FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <Container>
-        {/*
-          <div className = "row-title space-between">
-            <Title size="md">dHEDGE</Title>
-            <Tab
-                onChange={setSelected}
-                selectedTab={selected}
-                variant="contained"
-                items={[
-                    { id: '1', label: 'Investor', icon: "assets" },
-                    { id: '2', label: 'Manager', icon: "owners"}
-                ]}
-            />
-          </div>
-          { selected === '1' ? <InvestorContainer /> : <ManagerContainer /> }
-        */}
         <InvestorContainer />
       </Container>
     </ThemeProvider>

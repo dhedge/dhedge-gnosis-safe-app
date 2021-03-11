@@ -1,9 +1,9 @@
-import React, { useContext } from 'react'
+import { FC, useContext } from 'react'
 
 import { GlobalState } from 'GlobalState'
 import { PoolSelectionInput } from "components/forms"
 
-const SelectFund: React.FC = () => {
+const SelectFund: FC = () => {
     const [state, setState] = useContext(GlobalState)
 
     const confirmSelection = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>,contractAddress: string) => {

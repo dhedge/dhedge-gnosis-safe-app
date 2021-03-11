@@ -1,4 +1,4 @@
-import React, { FC, useContext, useState, useEffect, useCallback } from 'react'
+import { FC, useContext, useState, useEffect, useCallback } from 'react'
 import { Button, TextField, Title, Text } from "@gnosis.pm/safe-react-components"
 import { GlobalState } from 'GlobalState'
 import { getAbi } from 'utils/fn'
