@@ -4,7 +4,7 @@ import { theme } from "@gnosis.pm/safe-react-components";
 import { Loader, Title } from "@gnosis.pm/safe-react-components";
 import SafeProvider from '@rmeissner/safe-apps-react-sdk';
 import GlobalStyle from "./GlobalStyle";
-import StepperContainer from "containers/StepperContainer";
+import { ProviderContainer } from "containers";
 import { GlobalState } from 'GlobalState'
 import { StateInterface } from 'types/state.types';
 
@@ -24,7 +24,7 @@ const App: React.FC<IProps> = props => {
                 </>
             )}>
                 <GlobalState.Provider value={[state, setState]}>
-                    <StepperContainer />
+                    <ProviderContainer />
                 </GlobalState.Provider>
             </SafeProvider>
         </ThemeProvider>
