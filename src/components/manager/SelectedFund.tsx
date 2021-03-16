@@ -8,7 +8,7 @@ import DHedge from 'contracts/DHedge.json'
 
 const SelectedFund: React.FC = () => {
     const [state] = useContext(GlobalState)
-    const { web3, poolContractAddress } = state
+    const { web3, poolContractAddress, createPool } = state
     const [selected, setSelected] = useState('1');
     const [poolName, setPoolName] = useState('')
     const [poolManager, setPoolManager] = useState('');
@@ -31,8 +31,11 @@ const SelectedFund: React.FC = () => {
     }
 
     useEffect(() => {
+        if (createPool) return;
         getNames()
     }, [getNames])
+
+    if (createPool) return <></>;
 
     return (
         <div className = "padding-16">

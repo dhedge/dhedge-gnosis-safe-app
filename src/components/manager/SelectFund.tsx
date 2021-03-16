@@ -13,14 +13,15 @@ const SelectFund: React.FC = () => {
         setState({ ...state, activeStep: 1, poolContractAddress: contractAddress });
     }
 
+    const handleCreatePool = () => {
+        setState({ ...state, activeStep: 1, createPool: true });
+    }
+
     return (
         <div className = "padding-16">
             <PoolSelectionInput confirmSelection={confirmSelection} />
             <DividerWithText label="Or" />
-            <Button
-                size = "md"
-                color = "primary"
-            >
+            <Button size = "md" color = "primary" onClick={handleCreatePool}>
                 Create a New Pool
             </Button>
         </div>
