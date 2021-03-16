@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { makeStyles } from "@material-ui/core";
-import { Text } from "@gnosis.pm/safe-react-components"
+import { Text, Divider } from "@gnosis.pm/safe-react-components"
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -10,8 +10,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(2),
   },
   border: {
-    borderBottom: "2px solid lightgray",
-    width: "100%"
+    flex: 1
   },
   content: {
     paddingTop: theme.spacing(0.5),
@@ -29,9 +28,9 @@ export const DividerWithText: FC<IProps> = ({ label }) => {
  const classes = useStyles();
  return (
   <div className={classes.container}>
-    <div className={classes.border} />
+    <Divider className={classes.border} />
     <Text size="md" className={classes.content} color="secondaryLight">{label}</Text>
-    <div className={classes.border} />
+    <Divider className={classes.border} />
   </div>
  );
 };
