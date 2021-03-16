@@ -40,7 +40,7 @@ const StepperContainer: FC = () => {
     <ThemeProvider theme={theme}>
       <Container>
         <div className = "row-title space-between">
-          <Title size="md">dHEDGE</Title>
+          <Title size="sm">dHEDGE</Title>
           <Tab
               onChange={setSelected}
               selectedTab={selected}
