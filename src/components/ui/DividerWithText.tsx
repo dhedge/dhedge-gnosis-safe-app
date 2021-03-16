@@ -21,12 +21,16 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const DividerWithText: FC = ({ children }) => {
+interface IProps {
+  label: string
+}
+
+export const DividerWithText: FC<IProps> = ({ label }) => {
  const classes = useStyles();
  return (
   <div className={classes.container}>
     <div className={classes.border} />
-    <Text size="md" className={classes.content} color="secondaryLight">{children}</Text>
+    <Text size="md" className={classes.content} color="secondaryLight">{label}</Text>
     <div className={classes.border} />
   </div>
  );

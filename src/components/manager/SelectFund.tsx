@@ -16,7 +16,7 @@ const SelectFund: React.FC = () => {
     return (
         <div className = "padding-16">
             <PoolSelectionInput confirmSelection={confirmSelection} />
-            <DividerWithText children="Or" />
+            <DividerWithText label="Or" />
             <Button
                 size = "md"
                 color = "primary"
