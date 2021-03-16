@@ -1,17 +1,20 @@
-import React, { useContext, useState, useEffect, useCallback } from 'react'
+import { FC, useContext, useState, useEffect, useCallback } from 'react'
 import { Button, TextField, Title, Text } from "@gnosis.pm/safe-react-components"
 import { GlobalState } from 'GlobalState'
 import { getAbi } from 'utils/fn'
 import DHedge from 'contracts/DHedge.json'
 
-const SelectFund: React.FC = () => {
-    const [state, setState] = useContext(GlobalState)
+interface IProps {
+    confirmSelection: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, contractAddress: string) => void;
+}
+
+const PoolSelectionInput: FC<IProps> = (props) => {
+    const [state] = useContext(GlobalState)
     const [contractAddress, setContractAddress] = useState('');
     const [poolName, setPoolName] = useState('');
     const [poolManager, setPoolManager] = useState('');
     const { web3 } = state;
 
-    const confirmSelection = () => setState({ ...state, activeStep: 1, poolContractAddress: contractAddress });
     const updateTextField = (e: React.ChangeEvent<HTMLInputElement>) => setContractAddress(e.target.value)
 
     const getNames = useCallback(async () => {
@@ -40,7 +43,7 @@ const SelectFund: React.FC = () => {
     }, [contractAddress, getNames, web3]);
 
     return (
-        <div className = "padding-16">
+        <>
             {poolName && (
                 <div className="mg-b-small">
                     <Title size="sm">{poolName}</Title>
@@ -57,14 +60,14 @@ const SelectFund: React.FC = () => {
                 <Button
                     size = "md"
                     color = "primary"
-                    onClick = {confirmSelection}
+                    onClick = {e => props.confirmSelection(e, contractAddress)}
                     disabled = {!(web3.utils.isAddress(contractAddress) && poolName)}
                 >
                     Select
                 </Button>
             </div>
-        </div>
+        </>
     )
 }
 
-export default SelectFund;
+export default PoolSelectionInput;

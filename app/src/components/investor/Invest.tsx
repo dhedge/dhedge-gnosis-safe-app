@@ -1,6 +1,6 @@
-import React, { useContext, useState, useEffect, useCallback } from 'react'
+import { FC, useContext, useState, useEffect, useCallback } from 'react'
 import { Button, TextField, Select, Text } from "@gnosis.pm/safe-react-components"
-import { useSafe } from '@rmeissner/safe-apps-react-sdk'
+import { useSafeAppsSDK } from '@gnosis.pm/safe-apps-react-sdk';
 import { Transaction } from 'types/state.types'
 import { GlobalState } from 'GlobalState'
 import { SYNTH_ADDRESS } from 'utils/const'
@@ -11,10 +11,10 @@ const items = [
     { id: '1', label: 'sUSD' }
 ];
 
-const Invest: React.FC = () => {
-    const safe = useSafe()
+const Invest: FC = () => {
+    const { safe, sdk } = useSafeAppsSDK();
     const [state, setState] = useContext(GlobalState)
-    const { web3, poolContractAddress, appsSdk } = state
+    const { web3, poolContractAddress } = state
     const [amount, setAmount] = useState('')
     const [balance, setBalance] = useState('0')
     const [activeItemId, setActiveItemId] = useState('1')
@@ -37,27 +37,32 @@ const Invest: React.FC = () => {
     }
 
     const getBalance = useCallback(async () => {
-        const susdBalance = await contractSusd.methods.balanceOf(safe.info.safeAddress).call()
+        const susdBalance = await contractSusd.methods.balanceOf(safe.safeAddress).call()
         setBalance(web3.utils.fromWei(susdBalance));
     }, [safe, web3, contractSusd])
 
     const onSubmit = async () => {
-        const txs: Transaction[] = [{
-            to: SYNTH_ADDRESS.mainnet.SUSD || '',
-            value: '0',
-            data: contractSusd.methods.approve(
-                poolContractAddress,
-                web3.utils.toWei(amount)
-            ).encodeABI(),
-        },
-        {
-            to: poolContractAddress || '',
-            value: '0',
-            data: contractDhedge.methods.deposit(
-                web3.utils.toWei(amount)
-            ).encodeABI(),
-        }]
-        appsSdk.sendTransactions(txs);
+        try {
+            const txs: Transaction[] = [{
+                to: SYNTH_ADDRESS.mainnet.SUSD || '',
+                value: '0',
+                data: contractSusd.methods.approve(
+                    poolContractAddress,
+                    web3.utils.toWei(amount)
+                ).encodeABI(),
+            },
+            {
+                to: poolContractAddress || '',
+                value: '0',
+                data: contractDhedge.methods.deposit(
+                    web3.utils.toWei(amount)
+                ).encodeABI(),
+            }]
+    
+            await sdk.txs.send({ txs });
+        } catch (err) {
+            console.error(err.message);
+        }
     }
 
     useEffect(() => {

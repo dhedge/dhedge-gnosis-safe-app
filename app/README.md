@@ -10,6 +10,12 @@ cp .env.sample .env
 yarn start
 ```
 
+Generate SSL files in `/app`.
+
+```
+mkcert -key-file ./.cert/key.pem -cert-file ./.cert/cert.pem "localhost"
+```
+
 Then:
 
 - If HTTPS is used (by default enabled)

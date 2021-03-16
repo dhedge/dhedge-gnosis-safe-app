@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { theme } from "@gnosis.pm/safe-react-components";
-import { Loader, Title } from "@gnosis.pm/safe-react-components";
-import SafeProvider from '@rmeissner/safe-apps-react-sdk';
+import SafeProvider from '@gnosis.pm/safe-apps-react-sdk';
 import GlobalStyle from "./GlobalStyle";
-import StepperContainer from "containers/StepperContainer";
+import { ProviderContainer } from "containers";
 import { GlobalState } from 'GlobalState'
 import { StateInterface } from 'types/state.types';
 
@@ -17,14 +16,9 @@ const App: React.FC<IProps> = props => {
     return (
         <ThemeProvider theme={theme}>
             <GlobalStyle />
-            <SafeProvider loading={(
-                <>
-                    <Title size="md">Waiting for Safe...</Title>
-                    <Loader size="md" />
-                </>
-            )}>
+            <SafeProvider>
                 <GlobalState.Provider value={[state, setState]}>
-                    <StepperContainer />
+                    <ProviderContainer />
                 </GlobalState.Provider>
             </SafeProvider>
         </ThemeProvider>

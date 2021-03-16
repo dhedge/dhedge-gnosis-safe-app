@@ -73,6 +73,15 @@ const GlobalStyle = createGlobalStyle`
         cursor: pointer;
     }
 
+    .flex-row {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .space-between {
+        justify-content: space-between;
+    }
+
     @font-face {
         font-family: 'Averta';
         src: local('Averta'), local('Averta Bold'),
