@@ -4,7 +4,7 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import StepContent from '@material-ui/core/StepContent';
 import { GlobalState } from 'GlobalState';
-import { SelectFund, SelectedFund } from 'components/investor';
+import { SelectFund, SelectedFund } from 'components/manager';
 
 const ManagerContainer: React.FC = () => {
   const [state] = useContext(GlobalState)
