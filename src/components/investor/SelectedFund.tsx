@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useContext, useEffect } from 'react'
+import { FC, useState, useCallback, useContext, useEffect } from 'react'
 import { Tab, Title, Text } from '@gnosis.pm/safe-react-components'
 import { GlobalState } from 'GlobalState'
 import Invest from './Invest'
@@ -6,7 +6,7 @@ import Withdraw from './Withdraw'
 import { getAbi } from 'utils/fn'
 import DHedge from 'contracts/DHedge.json'
 
-const SelectedFund: React.FC = () => {
+const SelectedFund: FC = () => {
     const [state] = useContext(GlobalState)
     const { web3, poolContractAddress } = state
     const [selected, setSelected] = useState('1');

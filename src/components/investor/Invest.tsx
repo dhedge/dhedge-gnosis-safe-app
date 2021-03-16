@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useCallback } from 'react'
+import { FC, useContext, useState, useEffect, useCallback } from 'react'
 import { Button, TextField, Select, Text } from "@gnosis.pm/safe-react-components"
 import { useSafeAppsSDK } from '@gnosis.pm/safe-apps-react-sdk';
 import { Transaction } from 'types/state.types'
@@ -11,7 +11,7 @@ const items = [
     { id: '1', label: 'sUSD' }
 ];
 
-const Invest: React.FC = () => {
+const Invest: FC = () => {
     const { safe, sdk } = useSafeAppsSDK();
     const [state, setState] = useContext(GlobalState)
     const { web3, poolContractAddress } = state

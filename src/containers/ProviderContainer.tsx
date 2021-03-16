@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { FC, useState } from 'react';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { Tab, Title } from '@gnosis.pm/safe-react-components'
 import styled from "styled-components";
@@ -33,7 +33,7 @@ const Container = styled.form`
   grid-row-gap: 1rem;
 `;
 
-const StepperContainer: React.FC = () => {
+const StepperContainer: FC = () => {
   const [selected, setSelected] = useState('1');
 
   return (
