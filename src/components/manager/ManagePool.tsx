@@ -8,7 +8,7 @@ import DHedge from 'contracts/DHedge.json'
 
 const ManagePool: React.FC = () => {
     const [state] = useContext(GlobalState)
-    const { web3, poolContractAddress, createPool } = state
+    const { web3, poolContractAddress } = state
     const [selected, setSelected] = useState('1');
     const [poolName, setPoolName] = useState('')
     const [poolManager, setPoolManager] = useState('');

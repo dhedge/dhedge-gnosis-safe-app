@@ -1,9 +1,10 @@
 import React, { useContext, useState, useEffect, useCallback } from 'react'
 import { Button, TextField, Select, Text } from "@gnosis.pm/safe-react-components"
 import { useSafeAppsSDK } from '@gnosis.pm/safe-apps-react-sdk';
+
 import { Transaction } from 'types/state.types'
 import { GlobalState } from 'GlobalState'
-import { SYNTH_ADDRESS } from 'utils/const'
+import { SYNTH_ADDRESS_MAP } from 'utils/const'
 import { validNum } from 'utils/fn'
 import { useContracts } from 'hooks/useContracts'
 
@@ -44,7 +45,7 @@ const Invest: React.FC = () => {
     const onSubmit = async () => {
         try {
             const txs: Transaction[] = [{
-                to: SYNTH_ADDRESS.mainnet.SUSD || '',
+                to: SYNTH_ADDRESS_MAP.mainnet.sUSD || '',
                 value: '0',
                 data: contractSusd.methods.approve(
                     poolContractAddress,
