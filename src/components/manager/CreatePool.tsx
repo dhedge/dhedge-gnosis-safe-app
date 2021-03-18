@@ -131,7 +131,12 @@ const CreatePool: FC = () => {
           ))}
         </Select>
       </FormControl>
-      <ConfirmCancelButtons handleCancel={handleCancel} handleConfirm={handleConfirm} confirmText="Create" />
+      <ConfirmCancelButtons 
+        handleCancel={handleCancel} 
+        handleConfirm={handleConfirm} 
+        confirmText="Create" 
+        confirmDisabled={poolName === "" || managerName === "" || managerAddress === "" || enabledSynths.length === 0}
+      />
     </>
   );
 }
