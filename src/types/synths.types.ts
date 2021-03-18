@@ -69,5 +69,5 @@ export type SynthsAddresses = {
 };
 
 export type SynthsAddressesMap = {
-  [key in EthereumNetwork]: SynthsAddresses;
+  mainnet: SynthsAddresses;
 };

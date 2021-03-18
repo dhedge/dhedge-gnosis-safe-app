@@ -1,7 +1,7 @@
-import { PoolSelectionInput } from "./PoolSelectionInput";
+import { PoolSelectionInput } from "./PoolSelectionInput"
 import { ConfirmCancelButtons } from "./ConfirmCancelButtons"
 
 export { 
   PoolSelectionInput,
   ConfirmCancelButtons
-};
+}
