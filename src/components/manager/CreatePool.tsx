@@ -16,9 +16,40 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const marks = [
+  {
+    value: 2,
+    label: '2%',
+  },
+  {
+    value: 5,
+    label: '5%',
+  },
+  {
+    value: 10,
+    label: '10%',
+  },
+  {
+    value: 15,
+    label: '15%',
+  },
+  {
+    value: 20,
+    label: '20%',
+  },
+  {
+    value: 30,
+    label: '30%',
+  },
+  {
+    value: 50,
+    label: '50%',
+  },
+];
+
 const CreatePool: FC = () => {
-  const { safe } = useSafeAppsSDK();
-  const classes = useStyles();
+  const { safe } = useSafeAppsSDK()
+  const classes = useStyles()
   const [state, setState] = useContext(GlobalState)
 
   const [poolName, setPoolName] = useState("")
@@ -27,42 +58,11 @@ const CreatePool: FC = () => {
   const [managerAddress, setManagerAddress] = useState(safe.safeAddress)
   const [managerName, setManagerName] = useState("")
   const [enabledSynths, setEnabledSynths] = useState([])
-  const [activeItemId, setActiveItemId] = useState('');
 
   const handleSynthsSelect = (event: any) => {
     if (enabledSynths.length < 5) setEnabledSynths(event.target.value);
   };
 
-  const marks = [
-    {
-      value: 2,
-      label: '2%',
-    },
-    {
-      value: 5,
-      label: '5%',
-    },
-    {
-      value: 10,
-      label: '10%',
-    },
-    {
-      value: 15,
-      label: '15%',
-    },
-    {
-      value: 20,
-      label: '20%',
-    },
-    {
-      value: 30,
-      label: '30%',
-    },
-    {
-      value: 50,
-      label: '50%',
-    },
-  ];
 
   const handleCancel = () => setState({ ...state, activeStep: 0, createPool: false })
 
