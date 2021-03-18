@@ -1,11 +1,13 @@
 import { FC, useState, useContext } from 'react'
-import { Button, TextField, Title, Text, Switch } from "@gnosis.pm/safe-react-components"
+import { TextField, Title, Text, Switch } from "@gnosis.pm/safe-react-components"
 import { useSafeAppsSDK } from '@gnosis.pm/safe-apps-react-sdk'
 import { makeStyles, Chip, Select, MenuItem, FormControl, InputLabel } from "@material-ui/core"
 import Slider from '@material-ui/core/Slider'
 
 import { GlobalState } from 'GlobalState'
+import { Transaction } from 'types/state.types'
 import { SYNTHS_SUSD_EXCLUDED, SYNTHS } from 'config/const'
+import { stringToHex } from "services/utils/fn"
 import { useContracts } from "hooks"
 import { ConfirmCancelButtons } from "components/forms"
 
@@ -50,7 +52,7 @@ const marks = [
 ];
 
 const CreatePool: FC = () => {
-  const { safe } = useSafeAppsSDK()
+  const { safe, sdk } = useSafeAppsSDK()
   const classes = useStyles()
   const [state, setState] = useContext(GlobalState)
   const { contractFactory } = useContracts()
@@ -63,13 +65,30 @@ const CreatePool: FC = () => {
   const [enabledSynths, setEnabledSynths] = useState([])
 
   const handleSynthsSelect = (event: any) => {
-    if (enabledSynths.length < 5) setEnabledSynths(event.target.value);
-  };
+    if (enabledSynths.length < 5) setEnabledSynths(event.target.value)
+  }
 
   const handleCancel = () => setState({ ...state, activeStep: 0, createPool: false })
   
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
+    try {
+      const txs: Transaction[] = [{
+          to: contractFactory.options.address || '',
+          value: '0',
+          data: contractFactory.methods.createFund(
+              !isPublic,
+              managerAddress,
+              managerName,
+              poolName,
+              performanceFee,
+              enabledSynths.map(stringToHex)
+          ).encodeABI(),
+      }]
 
+      await sdk.txs.send({ txs })
+    } catch (err) {
+        console.error(err.message)
+    }
   }
 
   return (
