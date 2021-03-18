@@ -5,7 +5,8 @@ import { makeStyles, Chip, Select, MenuItem, FormControl, InputLabel } from "@ma
 import Slider from '@material-ui/core/Slider'
 
 import { GlobalState } from 'GlobalState'
-import { SYNTHS_SUSD_EXCLUDED, SYNTHS } from 'utils/const'
+import { SYNTHS_SUSD_EXCLUDED, SYNTHS } from 'config/const'
+import { useContracts } from "hooks"
 
 const useStyles = makeStyles(theme => ({
   formElement: {
@@ -51,6 +52,7 @@ const CreatePool: FC = () => {
   const { safe } = useSafeAppsSDK()
   const classes = useStyles()
   const [state, setState] = useContext(GlobalState)
+  const { contractFactory } = useContracts()
 
   const [poolName, setPoolName] = useState("")
   const [isPublic, setIsPublic] = useState(true)
@@ -63,8 +65,11 @@ const CreatePool: FC = () => {
     if (enabledSynths.length < 5) setEnabledSynths(event.target.value);
   };
 
-
   const handleCancel = () => setState({ ...state, activeStep: 0, createPool: false })
+  
+  const handleConfirm = () => {
+
+  }
 
   return (
     <>

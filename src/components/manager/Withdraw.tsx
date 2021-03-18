@@ -2,7 +2,7 @@ import React, { useContext, useState, useCallback, useEffect } from 'react'
 import { Button, TextField, Select, Text } from '@gnosis.pm/safe-react-components'
 import { useSafeAppsSDK } from '@gnosis.pm/safe-apps-react-sdk';
 import { GlobalState } from 'GlobalState'
-import { validNum } from 'utils/fn'
+import { validNum } from 'services/utils/fn'
 import { useContracts } from 'hooks/useContracts'
 import { Transaction } from 'types/state.types'
 

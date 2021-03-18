@@ -1,4 +1,4 @@
-import { positiveNumberFormat } from 'utils/regex'
+import { positiveNumberFormat } from 'services/utils/regex'
 
 const getAbi: (abiJson: any) => any = abiJson => JSON.parse(JSON.stringify(abiJson)).abi;
 const validNum: (value: string) => boolean = value => positiveNumberFormat.test(value)

@@ -3,8 +3,8 @@ import { Button, TextField, Select, Text } from "@gnosis.pm/safe-react-component
 import { useSafeAppsSDK } from '@gnosis.pm/safe-apps-react-sdk';
 import { Transaction } from 'types/state.types'
 import { GlobalState } from 'GlobalState'
-import { SYNTH_ADDRESS_MAP } from 'utils/const'
-import { validNum } from 'utils/fn'
+import { SYNTH_ADDRESS_MAP } from 'config/const'
+import { validNum } from 'services/utils/fn'
 import { useContracts } from 'hooks/useContracts'
 
 const items = [
