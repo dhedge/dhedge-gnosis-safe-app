@@ -1,10 +1,11 @@
 import { FC, useContext, useState, useCallback, useEffect } from 'react'
-import { Button, TextField, Select, Text } from '@gnosis.pm/safe-react-components'
+import { TextField, Select, Text } from '@gnosis.pm/safe-react-components'
 import { useSafeAppsSDK } from '@gnosis.pm/safe-apps-react-sdk';
 import { GlobalState } from 'GlobalState'
 import { validNum } from 'services/utils/fn'
 import { useContracts } from 'hooks/useContracts'
 import { Transaction } from 'types/state.types'
+import { ConfirmCancelButtons } from "components/forms"
 
 const items = [
     { id: '1', label: 'Pool' }
@@ -81,25 +82,12 @@ const Withdraw: FC = () => {
                     onChange={handleSetAmount}
                 />
             </div>
-            <div className="confirm-button-container">
-                <div className="mg-r-small">
-                    <Button
-                        size = "md"
-                        color = "secondary"
-                        onClick = {handleCancel}
-                    >
-                        Cancel
-                    </Button>
-                </div>
-                <Button
-                    size = "md"
-                    color = "primary"
-                    onClick = {onSubmit}
-                    disabled = {amount === '' || amount === '0'}
-                >
-                    Withdraw
-                </Button>
-            </div>
+            <ConfirmCancelButtons 
+                handleCancel={handleCancel}
+                handleConfirm={onSubmit}
+                confirmText="Withdraw"
+                confirmDisabled={amount === '' || amount === '0'}
+            />
         </>
     )
 }

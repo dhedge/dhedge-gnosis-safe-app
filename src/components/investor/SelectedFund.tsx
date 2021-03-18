@@ -50,8 +50,8 @@ const SelectedFund: FC = () => {
                     selectedTab={selected}
                     variant="outlined"
                     items={[
-                        { id: '1', label: 'Invest'},
-                        { id: '2', label: 'Withdraw'}
+                        { id: '1', label: 'Invest' },
+                        { id: '2', label: 'Withdraw' }
                     ]}
                 />
             </div>

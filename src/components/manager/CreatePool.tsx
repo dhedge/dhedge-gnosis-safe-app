@@ -7,6 +7,7 @@ import Slider from '@material-ui/core/Slider'
 import { GlobalState } from 'GlobalState'
 import { SYNTHS_SUSD_EXCLUDED, SYNTHS } from 'config/const'
 import { useContracts } from "hooks"
+import { ConfirmCancelButtons } from "components/forms"
 
 const useStyles = makeStyles(theme => ({
   formElement: {
@@ -130,23 +131,7 @@ const CreatePool: FC = () => {
           ))}
         </Select>
       </FormControl>
-      <div className={`confirm-button-container`}>
-          <div className="mg-r-small">
-              <Button
-                  size = "md"
-                  color = "secondary"
-                  onClick = {handleCancel}
-              >
-                  Cancel
-              </Button>
-          </div>
-          <Button
-              size = "md"
-              color = "primary"
-          >
-              Create
-          </Button>
-      </div>
+      <ConfirmCancelButtons handleCancel={handleCancel} handleConfirm={handleConfirm} confirmText="Create" />
     </>
   );
 }

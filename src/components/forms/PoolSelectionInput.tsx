@@ -8,7 +8,7 @@ interface IProps {
     confirmSelection: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, contractAddress: string) => void;
 }
 
-const PoolSelectionInput: FC<IProps> = (props) => {
+export const PoolSelectionInput: FC<IProps> = (props) => {
     const [state] = useContext(GlobalState)
     const [contractAddress, setContractAddress] = useState('');
     const [poolName, setPoolName] = useState('');
@@ -69,5 +69,3 @@ const PoolSelectionInput: FC<IProps> = (props) => {
         </>
     )
 }
-
-export default PoolSelectionInput;

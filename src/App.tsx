@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { theme } from "@gnosis.pm/safe-react-components";
-import SafeProvider from '@gnosis.pm/safe-apps-react-sdk';
 import GlobalStyle from "./GlobalStyle";
 import { ProviderContainer } from "containers";
 import { GlobalState } from 'GlobalState'
@@ -16,11 +15,9 @@ const App: React.FC<IProps> = props => {
     return (
         <ThemeProvider theme={theme}>
             <GlobalStyle />
-            <SafeProvider>
-                <GlobalState.Provider value={[state, setState]}>
-                    <ProviderContainer />
-                </GlobalState.Provider>
-            </SafeProvider>
+            <GlobalState.Provider value={[state, setState]}>
+                <ProviderContainer />
+            </GlobalState.Provider>
         </ThemeProvider>
     )
 }

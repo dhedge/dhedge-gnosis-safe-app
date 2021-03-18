@@ -1,33 +1,30 @@
 import React, { useState, useCallback, useContext, useEffect } from 'react'
-import { Tab, Title, Text } from '@gnosis.pm/safe-react-components'
+import { Title, Text } from '@gnosis.pm/safe-react-components'
 import { GlobalState } from 'GlobalState'
-import Invest from './Invest'
-import Withdraw from './Withdraw'
 import { getAbi } from 'services/utils/fn'
 import DHedge from 'contracts/DHedge.json'
 
 const ManagePool: React.FC = () => {
     const [state] = useContext(GlobalState)
     const { web3, poolContractAddress } = state
-    const [selected, setSelected] = useState('1');
     const [poolName, setPoolName] = useState('')
-    const [poolManager, setPoolManager] = useState('');
+    const [poolManager, setPoolManager] = useState('')
 
     const getNames = useCallback(async () => {
         try {
-            const contract = new web3.eth.Contract(getAbi(DHedge), poolContractAddress);
+            const contract = new web3.eth.Contract(getAbi(DHedge), poolContractAddress)
             const name = await contract.methods.name().call();
-            const managerName = await contract.methods.managerName().call();
-            setPoolName(name);
-            setPoolManager(managerName);
+            const managerName = await contract.methods.managerName().call()
+            setPoolName(name)
+            setPoolManager(managerName)
         } catch (err) {
-            resetValues();
+            resetValues()
         }
     }, [web3, poolContractAddress]);
 
     const resetValues = () => {
-        setPoolName('');
-        setPoolManager('');
+        setPoolName('')
+        setPoolManager('')
     }
 
     useEffect(() => {
@@ -44,18 +41,6 @@ const ManagePool: React.FC = () => {
                 </div>
                 <Text size='lg'>{`Managed by ${poolManager}`}</Text>
             </div>
-            <div className = "mg-b-small">
-                <Tab
-                    onChange={setSelected}
-                    selectedTab={selected}
-                    variant="outlined"
-                    items={[
-                        { id: '1', label: 'Invest'},
-                        { id: '2', label: 'Withdraw'}
-                    ]}
-                />
-            </div>
-            { selected === '1' ? <Invest /> : <Withdraw /> }
         </div>
     )
 }
