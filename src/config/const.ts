@@ -1,4 +1,3 @@
-
 import { SynthName, Synths, SynthsAddressesMap } from "types/synths.types";
 
 
@@ -58,6 +57,11 @@ const SYNTH_ADDRESS_MAP: SynthsAddressesMap = Object.freeze({
   },
 });
 
+const OTHER_CONTRACTS = Object.freeze({
+  mainnet: {
+    dHedgeFactory: "0x03D20ef9bdc19736F5e8Baf92D02C8661a5941F7",
+  }
+})
 
 const SYNTHS: Synths = Object.freeze({
   sUSD: {
@@ -373,5 +377,6 @@ const SYNTHS_SUSD_EXCLUDED = Object.keys(SYNTHS).filter((s) => s !== "sUSD") as 
 export {
   SYNTH_ADDRESS_MAP,
   SYNTHS,
-  SYNTHS_SUSD_EXCLUDED
+  SYNTHS_SUSD_EXCLUDED,
+  OTHER_CONTRACTS
 }
