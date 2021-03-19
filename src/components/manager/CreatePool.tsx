@@ -1,4 +1,5 @@
-import { FC, useState, useContext } from 'react'
+import React, { FC, useState, useContext } from 'react'
+import BigNumber from "bignumber.js"
 import { TextField, Title, Text, Switch } from "@gnosis.pm/safe-react-components"
 import { useSafeAppsSDK } from '@gnosis.pm/safe-apps-react-sdk'
 import { makeStyles, Chip, Select, MenuItem, FormControl, InputLabel } from "@material-ui/core"
@@ -59,12 +60,12 @@ const CreatePool: FC = () => {
 
   const [poolName, setPoolName] = useState("")
   const [isPublic, setIsPublic] = useState(true)
-  const [performanceFee, setPerformanceFee] = useState<number | number[]>(0)
+  const [performanceFee, setPerformanceFee] = useState<number>(0)
   const [managerAddress, setManagerAddress] = useState(safe.safeAddress)
   const [managerName, setManagerName] = useState("")
   const [enabledSynths, setEnabledSynths] = useState([])
 
-  const handleSynthsSelect = (event: any) => {
+  const handleSynthsSelect = (event: React.ChangeEvent<{ value: any }>) => {
     if (enabledSynths.length < 5) setEnabledSynths(event.target.value)
   }
 
@@ -80,7 +81,7 @@ const CreatePool: FC = () => {
               managerAddress,
               managerName,
               poolName,
-              performanceFee,
+              new BigNumber(performanceFee).multipliedBy(100).toFixed(0),
               enabledSynths.map(stringToHex)
           ).encodeABI(),
       }]
@@ -125,7 +126,7 @@ const CreatePool: FC = () => {
           marks={marks}
           max={50}
           min={0}
-          onChange={(event, value) => setPerformanceFee(value)}
+          onChange={(event, value: number | number[]) => setPerformanceFee(Array.isArray(value) ? value[0] : value)}
         />
       </div>
       <FormControl variant="filled" className={`${classes.formControl} ${classes.formElement}`}>
@@ -149,6 +150,7 @@ const CreatePool: FC = () => {
             </MenuItem>
           ))}
         </Select>
+        {enabledSynths}
       </FormControl>
       <ConfirmCancelButtons 
         handleCancel={handleCancel} 

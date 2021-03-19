@@ -25,12 +25,12 @@ interface IProps {
 }
 
 export const DividerWithText: FC<IProps> = ({ label }) => {
- const classes = useStyles();
- return (
-  <div className={classes.container}>
-    <Divider className={classes.border} />
-    <Text size="md" className={classes.content} color="secondaryLight">{label}</Text>
-    <Divider className={classes.border} />
-  </div>
+  const classes = useStyles();
+  return (
+    <div className={classes.container}>
+      <Divider className={classes.border} />
+      <Text size="md" className={classes.content} color="secondaryLight">{label}</Text>
+      <Divider className={classes.border} />
+    </div>
  );
 };
