@@ -60,7 +60,7 @@ const CreatePool: FC = () => {
 
   const [poolName, setPoolName] = useState("")
   const [isPublic, setIsPublic] = useState(true)
-  const [performanceFee, setPerformanceFee] = useState<number>(0)
+  const [performanceFee, setPerformanceFee] = useState<number>(10)
   const [managerAddress, setManagerAddress] = useState(safe.safeAddress)
   const [managerName, setManagerName] = useState("")
   const [enabledSynths, setEnabledSynths] = useState([])
@@ -87,6 +87,7 @@ const CreatePool: FC = () => {
       }]
 
       await sdk.txs.send({ txs })
+      setState({ ...state, activeStep: 0, createPool: false })
     } catch (err) {
         console.error(err.message)
     }
@@ -150,7 +151,6 @@ const CreatePool: FC = () => {
             </MenuItem>
           ))}
         </Select>
-        {enabledSynths}
       </FormControl>
       <ConfirmCancelButtons 
         handleCancel={handleCancel} 
@@ -162,4 +162,4 @@ const CreatePool: FC = () => {
   );
 }
 
-export default CreatePool;
+export default CreatePool
