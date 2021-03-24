@@ -77,6 +77,11 @@ const GlobalStyle = createGlobalStyle`
         display: flex;
         flex-direction: row;
     }
+    
+    .flex-align-center {
+        display: flex;
+        align-items: center;
+    }
 
     .space-between {
         justify-content: space-between;

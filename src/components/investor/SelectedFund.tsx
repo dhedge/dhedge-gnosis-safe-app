@@ -3,7 +3,7 @@ import { Tab, Title, Text } from '@gnosis.pm/safe-react-components'
 import { GlobalState } from 'GlobalState'
 import Invest from './Invest'
 import Withdraw from './Withdraw'
-import { getAbi } from 'utils/fn'
+import { getAbi } from 'services/utils/fn'
 import DHedge from 'contracts/DHedge.json'
 
 const SelectedFund: FC = () => {
@@ -50,8 +50,8 @@ const SelectedFund: FC = () => {
                     selectedTab={selected}
                     variant="outlined"
                     items={[
-                        { id: '1', label: 'Invest'},
-                        { id: '2', label: 'Withdraw'}
+                        { id: '1', label: 'Invest' },
+                        { id: '2', label: 'Withdraw' }
                     ]}
                 />
             </div>

@@ -1,14 +1,14 @@
 import { FC, useContext, useState, useEffect, useCallback } from 'react'
 import { Button, TextField, Title, Text } from "@gnosis.pm/safe-react-components"
 import { GlobalState } from 'GlobalState'
-import { getAbi } from 'utils/fn'
+import { getAbi } from 'services/utils/fn'
 import DHedge from 'contracts/DHedge.json'
 
 interface IProps {
     confirmSelection: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, contractAddress: string) => void;
 }
 
-const PoolSelectionInput: FC<IProps> = (props) => {
+export const PoolSelectionInput: FC<IProps> = (props) => {
     const [state] = useContext(GlobalState)
     const [contractAddress, setContractAddress] = useState('');
     const [poolName, setPoolName] = useState('');
@@ -69,5 +69,3 @@ const PoolSelectionInput: FC<IProps> = (props) => {
         </>
     )
 }
-
-export default PoolSelectionInput;

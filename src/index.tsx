@@ -2,12 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import { configureStore } from 'config/configureStore'
+import SafeProvider from '@gnosis.pm/safe-apps-react-sdk';
 
 configureStore()
   .then(({ initialState }) => {
     ReactDOM.render(
       <React.StrictMode>
-        <App initialState = { initialState }/>
+        <SafeProvider>
+          <App initialState = { initialState }/>
+        </SafeProvider>
       </React.StrictMode>,
       document.getElementById('root')
     )

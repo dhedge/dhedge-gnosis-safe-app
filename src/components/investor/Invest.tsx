@@ -1,11 +1,13 @@
 import { FC, useContext, useState, useEffect, useCallback } from 'react'
-import { Button, TextField, Select, Text } from "@gnosis.pm/safe-react-components"
-import { useSafeAppsSDK } from '@gnosis.pm/safe-apps-react-sdk';
+import { TextField, Select, Text } from "@gnosis.pm/safe-react-components"
+import { useSafeAppsSDK } from '@gnosis.pm/safe-apps-react-sdk'
+
 import { Transaction } from 'types/state.types'
 import { GlobalState } from 'GlobalState'
-import { SYNTH_ADDRESS } from 'utils/const'
-import { validNum } from 'utils/fn'
+import { SYNTH_ADDRESS_MAP } from 'config/const'
+import { validNum } from 'services/utils/fn'
 import { useContracts } from 'hooks/useContracts'
+import { ConfirmCancelButtons } from "components/forms"
 
 const items = [
     { id: '1', label: 'sUSD' }
@@ -44,7 +46,7 @@ const Invest: FC = () => {
     const onSubmit = async () => {
         try {
             const txs: Transaction[] = [{
-                to: SYNTH_ADDRESS.mainnet.SUSD || '',
+                to: SYNTH_ADDRESS_MAP.mainnet.sUSD || '',
                 value: '0',
                 data: contractSusd.methods.approve(
                     poolContractAddress,
@@ -91,25 +93,12 @@ const Invest: FC = () => {
                     onChange={handleSetAmount}
                 />
             </div>
-            <div className="confirm-button-container">
-                <div className="mg-r-small">
-                    <Button
-                        size = "md"
-                        color = "secondary"
-                        onClick = {handleCancel}
-                    >
-                        Cancel
-                    </Button>
-                </div>
-                <Button
-                    size = "md"
-                    color = "primary"
-                    onClick = {onSubmit}
-                    disabled = {amount === '' || amount === '0'}
-                >
-                    Approve and Invest
-                </Button>
-            </div>
+            <ConfirmCancelButtons 
+                handleCancel={handleCancel} 
+                handleConfirm={onSubmit} 
+                confirmDisabled={amount === '' || amount === '0'} 
+                confirmText="Approve and Invest" 
+            />
         </>
     )
 }

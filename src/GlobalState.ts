@@ -6,6 +6,7 @@ const web3 = new Web3(Web3.givenProvider);
 
 const initialState: StateInterface = {
     activeStep: 0,
+    createPool: false,
     web3
 }
 
